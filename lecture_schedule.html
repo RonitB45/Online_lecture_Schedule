@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Lecture Schedule with Batches</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0b0b;
+        }
+        table{
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .batch-badge {
+            padding: 4px 8px;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Online Lecture Schedule</h1>
+    </header>
+
+    <div class="container">
+        <label for="search" style="color: white;">Search:</label>
+        <input type="text" id="search" class="form-control" onkeyup="filterSchedule()" placeholder="Search by subject, time, or batch">
+
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Time</th>
+                    <th>Batch</th>
+                    <th>Platform</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populate this section dynamically with your lecture schedule data -->
+                <tr class="fadeIn">
+                    <td>Mathematics</td>
+                    <td>10:00 AM - 11:30 AM</td>
+                    <td><span class="badge badge-primary batch-badge">Batch A</span></td>
+                    <td>Zoom</td>
+                </tr>
+                <!-- Add more rows as needed -->
+                <tr class="fadeIn">
+                    <td>Physics</td>
+                    <td>12:00 PM - 2:00 PM</td>
+                    <td><span class="badge badge-primary batch-badge">Batch A</span></td>
+                    <td>Zoom</td>
+                </tr>
+                <tr class="fadeIn">
+                    <td>Chemistry</td>
+                    <td>2:00 PM - 4:30 PM</td>
+                    <td><span class="badge badge-primary batch-badge">Batch B</span></td>
+                    <td>Zoom</td>
+                </tr>
+                <tr class="fadeIn">
+                    <td>Biology</td>
+                    <td>5:00 PM - 7:00 PM</td>
+                    <td><span class="badge badge-primary batch-badge">Batch B</span></td>
+                    <td>Zoom</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary" style="margin-left: 212px; ;">Add +</button>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script>
+        function filterSchedule() {
+            // Implement your search/filtering logic here
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            table = document.getElementsByTagName("table")[0];
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Adjust the index based on the column you want to search
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        tr[i].classList.add('fadeIn');
+                    } else {
+                        tr[i].style.display = "none";
+                        tr[i].classList.remove('fadeIn');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
